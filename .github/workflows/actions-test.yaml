@@ -1,7 +1,12 @@
 name: actions-test
 on: [push]
+env:
+  VAR_NAME: "Global value"
 jobs:
   print-hello:
     runs-on: ubuntu-latest
     steps:
-      - run: "Hello"
+      - name: "Oppstartsmelding"
+        run: "Hello"
+      - name: "Test global var as $VAR_NAME"
+        run: echo "Test value $VAR_NAME"
