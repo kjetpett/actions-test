@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "kubernetes": "*.yaml",
+        "https://json.schemastore.org/github-action.json": "file:///Users/kjepet/Repos/actions-test/.github/workflows/actions-test.yaml"
+    }
+}
