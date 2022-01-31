@@ -1,12 +1,37 @@
-name: actions-test
-on: [push]
+name: vars-test
+
+on:
+  push
+
 env:
   VAR_NAME: "Global value"
+
 jobs:
-  print-hello:
+  print-vars:
     runs-on: ubuntu-latest
     steps:
-      - name: "Oppstartsmelding"
-        run: "Hello"
+
+      # using own varibales
       - name: "Test global var as $VAR_NAME"
         run: echo "Test value $VAR_NAME"
+
+      - name: "Test global var as ${{ env.VAR_NAME }}"
+        run: echo "Test value ${{ env.VAR_NAME }}"
+
+      # using default variables
+      - name: "Test job var as $GITHUB_REPOSITORY"
+        run: echo "Test value $GITHUB_REPOSITORY"
+
+      # this will be empty, as default variables are not in the context
+      - name: "Test job var as ${{ env.GITHUB_REPOSITORY }}"
+        run: echo "Test value ${{ env.GITHUB_REPOSITORY }}"
+
+      # using 'dynamic' variables
+      - name: "Set local var"
+        run: echo "local_var=local value" >> $GITHUB_ENV
+
+      - name: "Print local var as $local_var"
+        run: echo "$local_var"
+
+      - name: "Print local var as ${{ env.local_var }}"
+        run: echo "${{ env.local_var }}"
